@@ -1,13 +1,13 @@
 'use strict';
 
 import { Router } from 'express';
-import dish from './controllers/dishController';
+import { getThreeRandomDishes, saveLikedDish, getLikedDishes, deleteLikedDish } from './controllers/dishController';
 
 const router: Router = Router();
 
-router.get('/random-dishes', dish.getThreeRandomDishes);
-router.post('/likedDishes', dish.saveLikedDish);
-router.get('/likedDishes', dish.getLikedDishes);
-router.delete('/likedDishes/:dishId', dish.deleteLikedDish);
+router.get('/random-dishes', getThreeRandomDishes);
+router.post('/likedDishes', saveLikedDish);
+router.get('/likedDishes', getLikedDishes);
+router.delete('/likedDishes/:dishId', deleteLikedDish);
 
 export default router;

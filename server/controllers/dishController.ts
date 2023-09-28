@@ -1,16 +1,15 @@
 'use strict';
 
-const Dish = require('../models/Dish');
-const axios = require('axios');
-const cheerio = require('cheerio');
-const apiKey = process.env.API_KEY;
+import axios, { AxiosResponse } from 'axios';
+import cheerio from 'cheerio';
+import Dish, { IDish } from '../models/Dish';
 
+const apiKey = 'e01d44ef8a69456a904614af30d94e79';
 
-//this is for my main page, it should be showing 3 random dishes
-exports.getThreeRandomDishes = async (req, res) => {
+export const getThreeRandomDishes = async (req, res) => {
   try {
     const numberOfRecipes = 3;
-    const recipePromises = [];
+    const recipePromises: Promise<AxiosResponse>[] = [];
 
     for ( let i =0; i < numberOfRecipes; i++) {
       recipePromises.push(
@@ -19,7 +18,7 @@ exports.getThreeRandomDishes = async (req, res) => {
     }
 
     const responses = await Promise.all(recipePromises);
-    const randomDishes = [];
+    const randomDishes: IDish[] = [];
 
     responses.forEach((response) => {
       const randomRecipe = response.data.recipes[0];
@@ -34,8 +33,10 @@ exports.getThreeRandomDishes = async (req, res) => {
         image,
         summary: plainTextSummary,
         instructions: plainTextInstructions,
+        liked: false
       })
     });
+    console.log(randomDishes);
     res.status(200).json(randomDishes);
   } catch (err) {
     console.log('Error', err);
@@ -43,7 +44,7 @@ exports.getThreeRandomDishes = async (req, res) => {
   }
 }
 
-exports.saveLikedDish = async (req, res) => {
+export const saveLikedDish = async (req, res) => {
   try {
     const dishData = req.body;
 
@@ -65,9 +66,7 @@ exports.saveLikedDish = async (req, res) => {
   }
 }
 
-
-
-exports.getLikedDishes = async (req, res) => {
+export const getLikedDishes = async (req, res) => {
   try {
  
     const likedDishes = await Dish.find({ liked: true });
@@ -83,7 +82,7 @@ exports.getLikedDishes = async (req, res) => {
   }
 }
 
-exports.deleteLikedDish = async (req, res) => {
+export const deleteLikedDish = async (req, res) => {
   try {
     const dishId = req.params.dishId;
 
