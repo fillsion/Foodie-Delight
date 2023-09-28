@@ -1,0 +1,23 @@
+{
+  "name": "Foodie-Delight",
+  "version": "1.0.0",
+  "description": "## Introduction",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fillsion/Foodie-Delight.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fillsion/Foodie-Delight/issues"
+  },
+  "homepage": "https://github.com/fillsion/Foodie-Delight#readme",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}
