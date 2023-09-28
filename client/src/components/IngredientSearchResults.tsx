@@ -4,12 +4,10 @@ import {useParams, Link, Route, Routes} from 'react-router-dom';
 import InsForClickedRecipeFromSearch from './InsForClickedRecipeFromSearch';
 import { fetchRecipesByIngredient } from '../apiServices/apiServices';
 import { Recipe } from '../interfaces/general';
+import { IngredientSearchResultsProps } from '../interfaces/components';
 
 
-type Props = {
-  isLoading: boolean;
-}
-const  IngredientSearchResults:React.FC<Props> =  ({isLoading}: Props) =>{
+const  IngredientSearchResults:React.FC<IngredientSearchResultsProps> =  ({isLoading}: IngredientSearchResultsProps) =>{
 
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const {ingredient} = useParams();
