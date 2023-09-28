@@ -3,16 +3,22 @@ import {useParams, Link, Route, Routes} from 'react-router-dom';
 
 import InsForClickedRecipeFromSearch from './InsForClickedRecipeFromSearch';
 import { fetchRecipesByIngredient } from '../apiServices/apiServices';
+import { Recipe } from '../interfaces/general';
 
-function IngredientSearchResults ({isLoading}) {
 
-  const [recipes, setRecipes] = useState([]);
+type Props = {
+  isLoading: boolean;
+}
+const  IngredientSearchResults:React.FC<Props> =  ({isLoading}: Props) =>{
+
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
   const {ingredient} = useParams();
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await fetchRecipesByIngredient(ingredient); 
+        const data = await fetchRecipesByIngredient(ingredient);
+        console.log('fetch recepies', data)
         setRecipes(data);
       } catch (err) {
         console.log(err);
@@ -23,7 +29,7 @@ function IngredientSearchResults ({isLoading}) {
   }, [ingredient]);
 
   return (
-   
+
     <div className='search-results'>
     <h2>Recipes containing {ingredient}:</h2>
     {isLoading ? (
@@ -34,7 +40,7 @@ function IngredientSearchResults ({isLoading}) {
           <div className="recipe-card-from search" key={recipe.id}>
             <img src={recipe.image} alt={recipe.title} />
             <Link
-                to={`/ingredient/${ingredient}/${recipe.id}`} 
+                to={`/ingredient/${ingredient}/${recipe.id}`}
                 className="recipe-title-link"
               >
                 {recipe.title}
@@ -49,9 +55,9 @@ function IngredientSearchResults ({isLoading}) {
           element={<InsForClickedRecipeFromSearch />}
         />
       </Routes>
-      
+
     </div>
-      
+
   );
 }
 
