@@ -13,7 +13,7 @@ export async function fetchRandomDishes():Promise<RndDish[]> {
 }
 
 
-export async function handleLikeClick (recipe: RndDish, setLikedRecipes:React.Dispatch<React.SetStateAction<RndDish>>) {
+export async function handleLikeClick (recipe: RndDish, setLikedRecipes:React.Dispatch<React.SetStateAction<Record<string, boolean>>>) {
   try {
     await axios.post(`http://localhost:4242/likedDishes`, recipe);
     setLikedRecipes((prevLikedRecipes) => ({
