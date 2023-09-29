@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
-  const [searchText, setSearchText] = useState('');
-  
+  const [searchText, setSearchText] = useState<string>('');
+
   return (
     <nav className="Navbar">
       <div className="button-container">
