@@ -1,14 +1,12 @@
-
-
-import React, { useState, useEffect } from 'react';
-import { fetchRandomDishes } from '../apiServices/apiServices'; 
+import React, { useState, useEffect } from "react";
+import { fetchRandomDishes } from "../apiServices/apiServices";
+import { RndDish } from "../interfaces/general";
 
 function RandomDish() {
-  const [randomRecipe, setRandomRecipe] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  
+  const [randomRecipe, setRandomRecipe] = useState<RndDish[]>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const generateNewKey = () => {
+  const generateNewKey = (): number => {
     const newKey = Math.random() * 0.001;
     return newKey;
   };
@@ -18,11 +16,11 @@ function RandomDish() {
       const newKey = generateNewKey();
       console.log(newKey);
       try {
-        const data = await fetchRandomDishes(); 
+        const data = await fetchRandomDishes();
         setRandomRecipe(data);
-        setIsLoading(false); 
+        setIsLoading(false);
       } catch (error) {
-        setIsLoading(false); 
+        setIsLoading(false);
       }
     }
 

@@ -69,7 +69,7 @@ exports.saveLikedDish = async (req, res) => {
 
 exports.getLikedDishes = async (req, res) => {
   try {
- 
+
     const likedDishes = await Dish.find({ liked: true });
 
     if (likedDishes.length === 0) {

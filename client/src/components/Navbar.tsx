@@ -1,15 +1,13 @@
-
-
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function Navbar() {
-  const [searchText, setSearchText] = useState('');
-  
+  const [searchText, setSearchText] = useState<string>("");
+
   return (
     <nav className="Navbar">
       <div className="button-container">
-        <Link to={'/random-dish'} className="randomRecipe" reloadDocument >
+        <Link to={"/random-dish"} className="randomRecipe" reloadDocument>
           Random Recipe
         </Link>
         <Link to="/my-favorites" className="favoriteRecipe">
@@ -25,7 +23,7 @@ function Navbar() {
           onChange={(e) => setSearchText(e.target.value)}
         />
         <Link
-          to={searchText.trim() !== '' ? `/ingredient/${searchText}` : '/'}
+          to={searchText.trim() !== "" ? `/ingredient/${searchText}` : "/"}
           className="search-button"
         >
           Search
