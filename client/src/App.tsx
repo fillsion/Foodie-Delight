@@ -1,23 +1,22 @@
 // @ts-nocheck
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
-import './App.css';
-import Navbar from './components/Navbar';
-import ThreeRandomDishes from './components/ThreeRandomDishes';
-import RandomDish from './components/RandomDish';
-import IngredientSearchResults from './components/IngredientSearchResults';
-import InsForClickedRecipeFromSearch from './components/InsForClickedRecipeFromSearch';
-import MyFavorites from './components/MyFavorites';
+import "./App.css";
+import Navbar from "./components/Navbar";
+import ThreeRandomDishes from "./components/ThreeRandomDishes";
+import RandomDish from "./components/RandomDish";
+import IngredientSearchResults from "./components/IngredientSearchResults";
+import InsForClickedRecipeFromSearch from "./components/InsForClickedRecipeFromSearch";
+import MyFavorites from "./components/MyFavorites";
 
-import { fetchRandomDishes } from './apiServices/apiServices';
+import { fetchRandomDishes } from "./apiServices/apiServices";
 
 function App() {
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [favorites, setFavorites] = useState([]);
-  const [recipesThatAreLiked, setRecipesThatAreLiked] = useState([]);
-
+  const [recipesThatAreLiked] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -35,10 +34,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    const savedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavorites(savedFavorites);
   }, []);
-
 
   return (
     <Router>

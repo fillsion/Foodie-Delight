@@ -1,22 +1,22 @@
-import React, {useState, useEffect} from 'react';
-import {useParams, Link, Route, Routes} from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useParams, Link, Route, Routes } from "react-router-dom";
 
-import InsForClickedRecipeFromSearch from './InsForClickedRecipeFromSearch';
-import { fetchRecipesByIngredient } from '../apiServices/apiServices';
-import { Recipe } from '../interfaces/general';
-import { IngredientSearchResultsProps } from '../interfaces/components';
+import InsForClickedRecipeFromSearch from "./InsForClickedRecipeFromSearch";
+import { fetchRecipesByIngredient } from "../apiServices/apiServices";
+import { Recipe } from "../interfaces/general";
+import { IngredientSearchResultsProps } from "../interfaces/components";
 
-
-const  IngredientSearchResults:React.FC<IngredientSearchResultsProps> =  ({isLoading}: IngredientSearchResultsProps) =>{
-
+const IngredientSearchResults: React.FC<IngredientSearchResultsProps> = ({
+  isLoading,
+}: IngredientSearchResultsProps) => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const {ingredient} = useParams();
+  const { ingredient } = useParams();
 
   useEffect(() => {
     async function fetchData() {
       try {
         const data = await fetchRecipesByIngredient(ingredient);
-        console.log('fetch recepies', data)
+        console.log("fetch recepies", data);
         setRecipes(data);
       } catch (err) {
         console.log(err);
@@ -27,36 +27,30 @@ const  IngredientSearchResults:React.FC<IngredientSearchResultsProps> =  ({isLoa
   }, [ingredient]);
 
   return (
-
-    <div className='search-results'>
-    <h2>Recipes containing {ingredient}:</h2>
-    {isLoading ? (
-      <p>Loading...</p>
-    ) : (
-      <div className="recipe-list-from-search">
-        {recipes.map((recipe) => (
-          <div className="recipe-card-from search" key={recipe.id}>
-            <img src={recipe.image} alt={recipe.title} />
-            <Link
-                to={`/ingredient/${ingredient}/${recipe.id}`}
-                className="recipe-title-link"
-              >
+    <div className="search-results">
+      <h2>Recipes containing {ingredient}:</h2>
+      {isLoading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="recipe-list-from-search">
+          {recipes.map((recipe) => (
+            <div className="recipe-card-from search" key={recipe.id}>
+              <img src={recipe.image} alt={recipe.title} />
+              <Link to={`/ingredient/${ingredient}/${recipe.id}`} className="recipe-title-link">
                 {recipe.title}
               </Link>
-          </div>
-        ))}
-      </div>
-    )}
-    <Routes>
+            </div>
+          ))}
+        </div>
+      )}
+      <Routes>
         <Route
           path="/ingredient/:ingredient/:recipeId"
           element={<InsForClickedRecipeFromSearch />}
         />
       </Routes>
-
     </div>
-
   );
-}
+};
 
 export default IngredientSearchResults;

@@ -1,9 +1,7 @@
-
-
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { fetchRecipeDetails } from '../apiServices/apiServices';
-import { ProductDetails } from '../interfaces/general';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { fetchRecipeDetails } from "../apiServices/apiServices";
+import { ProductDetails } from "../interfaces/general";
 
 function InsForClickedRecipeFromSearch() {
   const { recipeId } = useParams();
@@ -22,7 +20,7 @@ function InsForClickedRecipeFromSearch() {
   }, [recipeId]);
 
   return (
-    <div className='InsClickedRecipe'>
+    <div className="InsClickedRecipe">
       {recipeDetails && (
         <>
           <img src={recipeDetails.image} alt={recipeDetails.title} />
@@ -30,7 +28,9 @@ function InsForClickedRecipeFromSearch() {
           <h2>Instructions:</h2>
           <div className="recipe-steps">
             {recipeDetails.analyzedInstructions[0]?.steps.map((step, index) => (
-              <p key={index}>Step {index + 1}: {step.step}</p>
+              <p key={index}>
+                Step {index + 1}: {step.step}
+              </p>
             ))}
           </div>
         </>

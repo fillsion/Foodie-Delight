@@ -1,13 +1,10 @@
-
-
-import React, { useState, useEffect } from 'react';
-import { fetchRandomDishes } from '../apiServices/apiServices';
-import { RndDish } from '../interfaces/general';
+import React, { useState, useEffect } from "react";
+import { fetchRandomDishes } from "../apiServices/apiServices";
+import { RndDish } from "../interfaces/general";
 
 function RandomDish() {
   const [randomRecipe, setRandomRecipe] = useState<RndDish[]>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
 
   const generateNewKey = (): number => {
     const newKey = Math.random() * 0.001;
