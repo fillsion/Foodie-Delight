@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { Recipe, ProductDetails } from '../interfaces/general';
+import { Recipe, ProductDetails, RndDish } from '../interfaces/general';
 const apiKey = ''; //'e01d44ef8a69456a904614af30d94e79'
 
-export async function fetchRandomDishes() {
+export async function fetchRandomDishes():Promise<RndDish[]> {
   try {
-    const response = await axios.get('http://localhost:4242/random-dishes');
+    const response = await axios.get<RndDish[]>('http://localhost:4242/random-dishes');
     return response.data;
   } catch (err) {
     console.error(err);

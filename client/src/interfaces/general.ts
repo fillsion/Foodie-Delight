@@ -148,3 +148,10 @@ export interface Dishes {
   liked: boolean;
   __v: number;
 }
+
+export interface RndDish{
+  title:string;
+  image:string;
+  summary:string;
+  instructions:string
+}
