@@ -3,15 +3,16 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchRecipeDetails } from '../apiServices/apiServices';
+import { ProductDetails } from '../interfaces/general';
 
 function InsForClickedRecipeFromSearch() {
   const { recipeId } = useParams();
-  const [recipeDetails, setRecipeDetails] = useState(null);
+  const [recipeDetails, setRecipeDetails] = useState<ProductDetails>(null);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const data = await fetchRecipeDetails(recipeId); 
+        const data = await fetchRecipeDetails(recipeId);
         setRecipeDetails(data);
       } catch (err) {
         console.log(err);

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { Recipe } from '../interfaces/general';
-const apiKey = '';
+import { Recipe, ProductDetails } from '../interfaces/general';
+const apiKey = ''; //'e01d44ef8a69456a904614af30d94e79'
 
 export async function fetchRandomDishes() {
   try {
@@ -28,19 +28,21 @@ export async function handleLikeClick (recipe, setLikedRecipes) {
 
 export async function fetchRecipesByIngredient(ingredient: String):Promise<Recipe[]> {
   try {
+    console.log(ingredient)
     const response = await axios.get<Recipe[]>(
       `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${ingredient}`
     );
+
     return response.data;
   } catch (err) {
     throw err;
   }
 }
 
-export async function fetchRecipeDetails(recipeId) {
+export async function fetchRecipeDetails(recipeId):Promise<ProductDetails> {
   try {
     const apiUrl = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`;
-    const response = await axios.get(apiUrl);
+    const response = await axios.get<ProductDetails>(apiUrl);
     return response.data;
   } catch(err) {
     throw err;
