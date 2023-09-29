@@ -8,7 +8,7 @@ import { ThreeRandomDishesProps } from '../interfaces/components';
 
 const  ThreeRandomDishes:React.FC<ThreeRandomDishesProps> = ({ recipes}: ThreeRandomDishesProps) => {
   const [selectedRecipe, setSelectedRecipe] = useState<RndDish>(null);
-  const [likedRecipes, setLikedRecipes] = useState<RndDish>(null);
+  const [likedRecipes, setLikedRecipes] = useState<Record<string, boolean>>({});
 
   const handleTitleClick = (recipe: RndDish) => {
     if (selectedRecipe === recipe) {

@@ -1,9 +1,9 @@
-import { Dishes } from "./general";
+import { Dishes, RndDish } from './general';
 
 export interface IngredientSearchResultsProps{
     isLoading: boolean;
 }
 
 export interface ThreeRandomDishesProps {
-    recipes: Dishes[]
+    recipes: RndDish[]
   }

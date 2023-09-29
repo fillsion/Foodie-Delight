@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Recipe, ProductDetails, RndDish } from '../interfaces/general';
-const apiKey = ''; //'e01d44ef8a69456a904614af30d94e79'
+const apiKey = 'e01d44ef8a69456a904614af30d94e79';
 
 export async function fetchRandomDishes():Promise<RndDish[]> {
   try {
@@ -13,7 +13,7 @@ export async function fetchRandomDishes():Promise<RndDish[]> {
 }
 
 
-export async function handleLikeClick (recipe: RndDish, setLikedRecipes:React.Dispatch<React.SetStateAction<RndDish>>) {
+export async function handleLikeClick (recipe: RndDish, setLikedRecipes:React.Dispatch<React.SetStateAction<Record<string, boolean>>>) {
   try {
     await axios.post(`http://localhost:4242/likedDishes`, recipe);
     setLikedRecipes((prevLikedRecipes) => ({
