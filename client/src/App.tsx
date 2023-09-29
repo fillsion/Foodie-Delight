@@ -11,12 +11,13 @@ import InsForClickedRecipeFromSearch from "./components/InsForClickedRecipeFromS
 import MyFavorites from "./components/MyFavorites";
 
 import { fetchRandomDishes } from "./apiServices/apiServices";
+import { RndDish } from './interfaces/general';
 
 function App() {
-  const [recipes, setRecipes] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [favorites, setFavorites] = useState([]);
-  const [recipesThatAreLiked] = useState([]);
+  const [recipes, setRecipes] = useState<RndDish[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [favorites, setFavorites] = useState<RndDish[]>([]);
+  const [recipesThatAreLiked] = useState<RndDish[]>([]);
 
   useEffect(() => {
     async function fetchData() {
