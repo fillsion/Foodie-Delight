@@ -1,9 +1,11 @@
+import React from 'react';
 import axios from 'axios';
-const apiKey = '';
+import { Recipe, ProductDetails, RndDish } from '../interfaces/general';
+const apiKey = ''; //'e01d44ef8a69456a904614af30d94e79'
 
-export async function fetchRandomDishes() {
+export async function fetchRandomDishes():Promise<RndDish[]> {
   try {
-    const response = await axios.get('http://localhost:4242/random-dishes');
+    const response = await axios.get<RndDish[]>('http://localhost:4242/random-dishes');
     return response.data;
   } catch (err) {
     console.error(err);
@@ -11,7 +13,7 @@ export async function fetchRandomDishes() {
 }
 
 
-export async function handleLikeClick (recipe, setLikedRecipes) {
+export async function handleLikeClick (recipe: RndDish, setLikedRecipes:React.Dispatch<React.SetStateAction<RndDish>>) {
   try {
     await axios.post(`http://localhost:4242/likedDishes`, recipe);
     setLikedRecipes((prevLikedRecipes) => ({
@@ -25,21 +27,23 @@ export async function handleLikeClick (recipe, setLikedRecipes) {
 };
 
 
-export async function fetchRecipesByIngredient(ingredient) {
+export async function fetchRecipesByIngredient(ingredient: String):Promise<Recipe[]> {
   try {
-    const response = await axios.get(
+    console.log(ingredient)
+    const response = await axios.get<Recipe[]>(
       `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${apiKey}&ingredients=${ingredient}`
     );
+
     return response.data;
   } catch (err) {
     throw err;
   }
 }
 
-export async function fetchRecipeDetails(recipeId) {
+export async function fetchRecipeDetails(recipeId):Promise<ProductDetails> {
   try {
     const apiUrl = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`;
-    const response = await axios.get(apiUrl);
+    const response = await axios.get<ProductDetails>(apiUrl);
     return response.data;
   } catch(err) {
     throw err;
