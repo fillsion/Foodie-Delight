@@ -1,12 +1,16 @@
 
 import React, { useState } from 'react';
 import { handleLikeClick } from '../apiServices/apiServices';
+import { RndDish } from '../interfaces/general';
+import { ThreeRandomDishesProps } from '../interfaces/components';
 
-function ThreeRandomDishes({ recipes, recipesThatAreLiked }){
-  const [selectedRecipe, setSelectedRecipe] = useState(null);
-  const [likedRecipes, setLikedRecipes] = useState({});
 
-  const handleTitleClick = (recipe) => {
+
+const  ThreeRandomDishes:React.FC<ThreeRandomDishesProps> = ({ recipes}: ThreeRandomDishesProps) => {
+  const [selectedRecipe, setSelectedRecipe] = useState<RndDish>(null);
+  const [likedRecipes, setLikedRecipes] = useState<Record<string, boolean>>({});
+
+  const handleTitleClick = (recipe: RndDish) => {
     if (selectedRecipe === recipe) {
       setSelectedRecipe(null);
     } else {
@@ -14,7 +18,7 @@ function ThreeRandomDishes({ recipes, recipesThatAreLiked }){
     }
   };
 
-  const handleLikeClickWrapper = (recipe) => {
+  const handleLikeClickWrapper = (recipe: RndDish) => {
     handleLikeClick(recipe, setLikedRecipes);
   };
 
