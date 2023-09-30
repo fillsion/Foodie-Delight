@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link, Route, Routes } from "react-router-dom";
+import React from "react";
+import {  Link, Route, Routes } from "react-router-dom";
 
 import InsForClickedRecipeFromSearch from "./InsForClickedRecipeFromSearch";
-import { fetchRecipesByIngredient } from "../apiServices/apiServices";
-import { Recipe } from "../interfaces/general";
 import { IngredientSearchResultsProps } from "../interfaces/components";
 import useSearch from "../hooks/useSearch";
 
