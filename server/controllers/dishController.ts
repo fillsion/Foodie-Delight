@@ -1,7 +1,7 @@
 'use strict';
 
 import axios, { AxiosResponse } from 'axios';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import Dish, { IDish } from '../models/Dish';
 
 const apiKey = 'e01d44ef8a69456a904614af30d94e79';
@@ -47,7 +47,6 @@ export const getThreeRandomDishes = async (req, res) => {
 export const saveLikedDish = async (req, res) => {
   try {
     const dishData = req.body;
-
     const existingDish = await Dish.findOne(dishData);
 
     if (existingDish) {
@@ -55,7 +54,6 @@ export const saveLikedDish = async (req, res) => {
     }
 
     const newDish = new Dish({ ...dishData, liked: true });
-
     await newDish.save();
 
     res.status(200).json({ message: 'Dish liked and saved successfully' });
