@@ -31,10 +31,10 @@ describe('integration tests', () => {
   it('it should save a liked dish to the database', async () => {
     
     const dishData = {
-      title: 'Test Dish2',
-      image: 'test-image-url2',
-      summary: 'Test summary2',
-      instructions: 'Test instructions2',
+      title: 'Test Dish',
+      image: 'test-image-url',
+      summary: 'Test summary',
+      instructions: 'Test instructions',
       liked: false
     };
 
@@ -50,17 +50,17 @@ describe('integration tests', () => {
   it('it should get all liked dishes', async () => {
     const likedDishes = [
       {
+        title: 'Test Dish',
+        image: 'test-image-url',
+        summary: 'Test summary',
+        instructions: 'Test instructions',
+        liked: true 
+      },
+      {
         title: 'Test Dish2',
         image: 'test-image-url2',
         summary: 'Test summary2',
         instructions: 'Test instructions2',
-        liked: true 
-      },
-      {
-        title: 'Test Dish3',
-        image: 'test-image-url3',
-        summary: 'Test summary3',
-        instructions: 'Test instructions3',
         liked: true
       },
     ];
@@ -70,7 +70,24 @@ describe('integration tests', () => {
     const response = await request.get('/likedDishes').expect(200);
     
     expect(response.body.length).toBe(likedDishes.length);
-
   })
+
+  it('should delete an existing liked dish', async () => {
+    const likedDish = new Dish({
+      title: 'Test Dish',
+      image: 'test-image-url',
+      summary: 'Test summary',
+      instructions: 'Test instructions',
+      liked: true,
+    });
+    await likedDish.save();
+
+    const response = await request.delete(`/likedDishes/${likedDish._id}`).expect(200);
+
+    expect(response.body.message).toBe('Dish deleted successfully');
+
+    const deletedDish = await Dish.findById(likedDish._id);
+    expect(deletedDish).toBeNull();
+  });
 })
 
