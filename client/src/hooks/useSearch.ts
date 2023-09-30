@@ -12,6 +12,7 @@ export default function useSearch() {
     useEffect(() => {
       async function fetchData() {
         try {
+            if (!ingredient) return;
           const data = await fetchRecipesByIngredient(ingredient);
           console.log("fetch recepies", data);
           setRecipes(data);

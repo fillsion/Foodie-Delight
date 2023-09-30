@@ -3,7 +3,7 @@ import { fetchRandomDishes } from "../apiServices/apiServices";
 import { RndDish } from "../interfaces/general";
 
 function useRandomDish() {
-  const [randomRecipe, setRandomRecipe] = useState<RndDish[]>(null);
+  const [randomRecipe, setRandomRecipe] = useState<RndDish[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const generateNewKey = (): number => {
