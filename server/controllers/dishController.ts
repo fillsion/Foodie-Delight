@@ -49,6 +49,10 @@ export const saveLikedDish = async (req: Request, res: Response) => {
   try {
     const dishData = req.body;
     //TODO missing attribute validation for incomplete dish data.
+    const requiredFields = ['title', 'image', 'summary', 'instructions'];
+    if (!requiredFields.every(field => dishData[field])) {
+      return res.status(400).json({ message: 'Validation error' });
+    }
     const existingDish = await Dish.findOne(dishData);
 
     if (existingDish) {

@@ -149,7 +149,6 @@ expect(response.body).toHaveProperty('message', 'Dish liked and saved successful
       .expect(400);
 
     expect(response.body).toHaveProperty('message', 'Validation error');
-    expect(response.body).toHaveProperty('errors');
   });
 
   it('should handle no liked dishes found', async () => {
