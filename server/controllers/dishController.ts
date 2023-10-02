@@ -3,10 +3,11 @@
 import axios, { AxiosResponse } from 'axios';
 import * as cheerio from 'cheerio';
 import Dish, { IDish } from '../models/Dish';
+import { Request, Response } from 'express';
 
 const apiKey = 'e01d44ef8a69456a904614af30d94e79';
 
-export const getThreeRandomDishes = async (req, res) => {
+export const getThreeRandomDishes = async (req: Request, res: Response) => {
   try {
     const numberOfRecipes = 3;
     const recipePromises: Promise<AxiosResponse>[] = [];
@@ -44,9 +45,10 @@ export const getThreeRandomDishes = async (req, res) => {
   }
 }
 
-export const saveLikedDish = async (req, res) => {
+export const saveLikedDish = async (req: Request, res: Response) => {
   try {
     const dishData = req.body;
+    //TODO missing attribute validation for incomplete dish data.
     const existingDish = await Dish.findOne(dishData);
 
     if (existingDish) {
@@ -64,9 +66,9 @@ export const saveLikedDish = async (req, res) => {
   }
 }
 
-export const getLikedDishes = async (req, res) => {
+export const getLikedDishes = async (req: Request, res: Response) => {
   try {
- 
+
     const likedDishes = await Dish.find({ liked: true });
 
     if (likedDishes.length === 0) {
@@ -80,7 +82,7 @@ export const getLikedDishes = async (req, res) => {
   }
 }
 
-export const deleteLikedDish = async (req, res) => {
+export const deleteLikedDish = async (req: Request, res: Response) => {
   try {
     const dishId = req.params.dishId;
 
