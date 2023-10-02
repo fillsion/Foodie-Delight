@@ -1,30 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link, Route, Routes } from "react-router-dom";
+import React from "react";
+import {  Link, Route, Routes } from "react-router-dom";
 
 import InsForClickedRecipeFromSearch from "./InsForClickedRecipeFromSearch";
-import { fetchRecipesByIngredient } from "../apiServices/apiServices";
-import { Recipe } from "../interfaces/general";
 import { IngredientSearchResultsProps } from "../interfaces/components";
+import useSearch from "../hooks/useSearch";
 
 const IngredientSearchResults: React.FC<IngredientSearchResultsProps> = ({
   isLoading,
 }: IngredientSearchResultsProps) => {
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
-  const { ingredient } = useParams();
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await fetchRecipesByIngredient(ingredient);
-        console.log("fetch recepies", data);
-        setRecipes(data);
-      } catch (err) {
-        console.log(err);
-      }
-    }
-
-    fetchData();
-  }, [ingredient]);
+  const { recipes, ingredient } = useSearch();
 
   return (
     <div className="search-results">
