@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 import "./App.css";
@@ -10,14 +10,14 @@ import InsForClickedRecipeFromSearch from "./components/InsForClickedRecipeFromS
 import MyFavorites from "./components/MyFavorites";
 
 import { fetchRandomDishes } from "./apiServices/apiServices";
-import { RndDish } from './interfaces/general';
+import { RndDish } from "./interfaces/general";
+import { ErrorContext } from "./context/Error";
 
 function App() {
   const [recipes, setRecipes] = useState<RndDish[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [favorites, setFavorites] = useState<RndDish[]>([]);
-  const [recipesThatAreLiked] = useState<RndDish[]>([]);
 
+  const { showError } = useContext(ErrorContext);
   useEffect(() => {
     async function fetchData() {
       try {
@@ -25,17 +25,12 @@ function App() {
         setRecipes(data);
         setIsLoading(false);
       } catch (err) {
-        console.error(err);
+        showError(err);
         setIsLoading(false);
       }
     }
 
     fetchData();
-  }, []);
-
-  useEffect(() => {
-    const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    setFavorites(savedFavorites);
   }, []);
 
   return (
@@ -63,9 +58,11 @@ function App() {
           <Route path="/random-dish" element={<RandomDish />} />
           <Route
             path="/my-favorites"
-            element={<MyFavorites
+            element={
+              <MyFavorites
               // recipesThatAreLiked={recipesThatAreLiked}
-              />}
+              />
+            }
           />
           <Route
             path="/ingredient/:ingredient/*"
