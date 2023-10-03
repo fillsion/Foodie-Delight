@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import { fetchRecipesByIngredient } from '../apiServices/apiServices';
 import { useParams } from 'react-router-dom';
 import { Recipe } from '../interfaces/general';

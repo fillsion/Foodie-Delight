@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios, { AxiosError } from "axios";
 import { removeFromFavorites } from "../apiServices/apiServices";
 import { Dishes, ErrorResponse } from "../interfaces/general";

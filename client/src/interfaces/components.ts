@@ -1,4 +1,4 @@
-import { Dishes, RndDish } from './general';
+import { RndDish } from './general';
 
 export interface IngredientSearchResultsProps{
     isLoading: boolean;

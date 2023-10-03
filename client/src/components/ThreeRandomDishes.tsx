@@ -23,7 +23,7 @@ const ThreeRandomDishes: React.FC<ThreeRandomDishesProps> = ({
 
   return (
     <div className="recipe-list">
-      {recipes.map((recipe) => (
+      {recipes && recipes.map((recipe) => (
         <div className="recipe-card" key={recipe.title}>
           <img src={recipe.image} alt={recipe.title} />
           <p className="recipe-title" onClick={() => handleTitleClick(recipe)}>

@@ -36,7 +36,7 @@ export async function fetchRecipesByIngredient(ingredient: string): Promise<Reci
 
     return response.data;
   } catch (err) {
-    throw err;
+    console.log(err)
   }
 }
 
@@ -46,7 +46,7 @@ export async function fetchRecipeDetails(recipeId: string): Promise<ProductDetai
     const response = await axios.get<ProductDetails>(apiUrl);
     return response.data;
   } catch (err) {
-    throw err;
+    console.log(err)
   }
 }
 
@@ -54,6 +54,6 @@ export async function removeFromFavorites(dishId: string) {
   try {
     await axios.delete(`http://localhost:4242/likedDishes/${dishId}`);
   } catch (err) {
-    throw err;
+    console.log(err)
   }
 }
