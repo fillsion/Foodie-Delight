@@ -1,14 +1,13 @@
+import React, { useState } from "react";
+import { handleLikeClick } from "../apiServices/apiServices";
+import { RndDish } from "../interfaces/general";
+import { ThreeRandomDishesProps } from "../interfaces/components";
 
-import React, { useState } from 'react';
-import { handleLikeClick } from '../apiServices/apiServices';
-import { RndDish } from '../interfaces/general';
-import { ThreeRandomDishesProps } from '../interfaces/components';
-
-
-
-const  ThreeRandomDishes:React.FC<ThreeRandomDishesProps> = ({ recipes}: ThreeRandomDishesProps) => {
-  const [selectedRecipe, setSelectedRecipe] = useState<RndDish>(null);
-  const [likedRecipes, setLikedRecipes] = useState<RndDish>(null);
+const ThreeRandomDishes: React.FC<ThreeRandomDishesProps> = ({
+  recipes,
+}: ThreeRandomDishesProps) => {
+  const [selectedRecipe, setSelectedRecipe] = useState<RndDish | null>(null);
+  const [likedRecipes, setLikedRecipes] = useState<Record<string, boolean>>({});
 
   const handleTitleClick = (recipe: RndDish) => {
     if (selectedRecipe === recipe) {
@@ -23,23 +22,21 @@ const  ThreeRandomDishes:React.FC<ThreeRandomDishesProps> = ({ recipes}: ThreeRa
   };
 
   return (
-    <div className='recipe-list'>
-      {recipes.map((recipe) => (
-        <div className='recipe-card' key={recipe.title}>
+    <div className="recipe-list">
+      {recipes && recipes.map((recipe) => (
+        <div className="recipe-card" key={recipe.title}>
           <img src={recipe.image} alt={recipe.title} />
-          <p className='recipe-title' onClick={() => handleTitleClick(recipe)}>
+          <p className="recipe-title" onClick={() => handleTitleClick(recipe)}>
             {recipe.title}
           </p>
           <button
-            className={`like-button ${
-              likedRecipes[recipe.title] ? 'liked' : 'not-liked'
-            }`}
+            className={`like-button ${likedRecipes[recipe.title] ? "liked" : "not-liked"}`}
             onClick={() => handleLikeClickWrapper(recipe)}
           >
-            {likedRecipes[recipe.title] ? 'Liked' : 'Like'}
+            {likedRecipes[recipe.title] ? "Liked" : "Like"}
           </button>
           {selectedRecipe === recipe && (
-            <div className='recipe-instructions'>
+            <div className="recipe-instructions">
               <h2>Instructions:</h2>
               <p>{recipe.instructions}</p>
             </div>
@@ -48,7 +45,6 @@ const  ThreeRandomDishes:React.FC<ThreeRandomDishesProps> = ({ recipes}: ThreeRa
       ))}
     </div>
   );
-}
+};
 
 export default ThreeRandomDishes;
-

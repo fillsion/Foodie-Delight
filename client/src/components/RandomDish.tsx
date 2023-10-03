@@ -1,32 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { fetchRandomDishes } from "../apiServices/apiServices";
-import { RndDish } from "../interfaces/general";
+import React from 'react'
+import useRandomDish from '../hooks/useRandomDish';
 
 function RandomDish() {
-  const [randomRecipe, setRandomRecipe] = useState<RndDish[]>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const generateNewKey = (): number => {
-    const newKey = Math.random() * 0.001;
-    return newKey;
-  };
-
-  useEffect(() => {
-    async function fetchData() {
-      const newKey = generateNewKey();
-      console.log(newKey);
-      try {
-        const data = await fetchRandomDishes();
-        setRandomRecipe(data);
-        setIsLoading(false);
-      } catch (error) {
-        setIsLoading(false);
-      }
-    }
-
-    fetchData();
-  }, []);
-
+  const {randomRecipe, isLoading} = useRandomDish()
   return (
     <div>
       <h2>Random Recipe</h2>
