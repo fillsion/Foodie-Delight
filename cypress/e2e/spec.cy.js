@@ -16,6 +16,4 @@ it("should navigate to the My Favorites page", () => {
   // Click on the "My Favorites" link
   cy.visit("http://localhost:3000/my-favorites");
   //cy.contains("favorite-dishes").click()
-
-
-});
+})})
