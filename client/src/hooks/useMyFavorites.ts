@@ -1,24 +1,23 @@
-import { useState, useEffect } from "react";
-import axios, { AxiosError } from "axios";
-import { removeFromFavorites } from "../apiServices/apiServices";
+import { useState, useEffect, useContext } from "react";
+import { AxiosError } from "axios";
+import { removeFromFavorites, fetchLikedDishes } from "../apiServices/apiServices";
 import { Dishes, ErrorResponse } from "../interfaces/general";
+import { ErrorContext } from "../context/Error";
 
 function useMyFavorites() {
   const [likedDishes, setLikedDishes] = useState<Dishes[]>([]);
+  const { showError } = useContext(ErrorContext);
 
   useEffect(() => {
-    axios
-      .get<Dishes[]>("http://localhost:4242/likedDishes")
-      .then((response) => {
-        setLikedDishes(response.data);
-      })
-      .catch((error: AxiosError<ErrorResponse>) => {
-        if (error.response && error.response.data.message) {
-          console.error("Error:", error.response.data.message);
-        } else {
-          console.error("Error:", error.message);
-        }
-      });
+    async function fetchData() {
+      try {
+        const data = await fetchLikedDishes();
+        setLikedDishes(data);
+      } catch (error) {
+        showError(error);
+      }
+    }
+    fetchData();
   }, []);
 
   const handleRemoveFromFavorites = (dishId: string) => {
@@ -35,7 +34,7 @@ function useMyFavorites() {
       });
   };
 
-  return {likedDishes,handleRemoveFromFavorites}
+  return { likedDishes, handleRemoveFromFavorites };
 }
 
 export default useMyFavorites;

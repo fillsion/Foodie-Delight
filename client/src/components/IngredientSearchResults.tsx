@@ -1,9 +1,12 @@
 import React from "react";
-import {  Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 
 import InsForClickedRecipeFromSearch from "./InsForClickedRecipeFromSearch";
-import { IngredientSearchResultsProps } from "../interfaces/components";
 import useSearch from "../hooks/useSearch";
+
+interface IngredientSearchResultsProps {
+  isLoading: boolean;
+}
 
 const IngredientSearchResults: React.FC<IngredientSearchResultsProps> = ({
   isLoading,

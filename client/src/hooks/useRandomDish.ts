@@ -1,25 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { fetchRandomDishes } from "../apiServices/apiServices";
+import { ErrorContext } from "../context/Error";
 import { RndDish } from "../interfaces/general";
 
 function useRandomDish() {
   const [randomRecipe, setRandomRecipe] = useState<RndDish[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  const generateNewKey = (): number => {
-    const newKey = Math.random() * 0.001;
-    return newKey;
-  };
+  const { showError } = useContext(ErrorContext);
 
   useEffect(() => {
     async function fetchData() {
-      const newKey = generateNewKey();
-      console.log(newKey);
       try {
         const data = await fetchRandomDishes();
         setRandomRecipe(data);
         setIsLoading(false);
       } catch (error) {
+        showError(error);
         setIsLoading(false);
       }
     }
@@ -27,7 +23,7 @@ function useRandomDish() {
     fetchData();
   }, []);
 
-  return {randomRecipe, isLoading}
+  return { randomRecipe, isLoading };
 }
 
 export default useRandomDish;

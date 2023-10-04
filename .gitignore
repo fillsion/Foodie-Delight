@@ -19,6 +19,10 @@ coverage
 # Dependency directories
 node_modules
 
+# Ignore node_modules directory
+node_modules/
+
+
 # Optional npm cache directory
 .npm
 
