@@ -16,9 +16,9 @@ const useThreeRandomDishes = () => {
     }
   };
 
-  const handleLikeClickWrapper = async (recipe: RndDish) => {
+  const handleLikeClickWrapper = async (email: string, recipe: RndDish) => {
     try {
-      await handleLikeClick(recipe);
+      await handleLikeClick(email, recipe);
       setLikedRecipes((prevLikedRecipes) => ({
         ...prevLikedRecipes,
         [recipe.title]: !prevLikedRecipes[recipe.title],
