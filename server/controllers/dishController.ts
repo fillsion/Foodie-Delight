@@ -2,7 +2,8 @@
 
 import axios, { AxiosResponse } from 'axios';
 import * as cheerio from 'cheerio';
-import Dish, { IDish } from '../models/Dish';
+import Dish, { IDish } from '../models/User';
+import User, {IUser} from '../models/User';
 import { Request, Response } from 'express';
 
 const apiKey = 'e01d44ef8a69456a904614af30d94e79';
@@ -47,21 +48,37 @@ export const getThreeRandomDishes = async (req: Request, res: Response) => {
 
 export const saveLikedDish = async (req: Request, res: Response) => {
   try {
-    const dishData = req.body;
+    const { email, dishData} = req.body;
     //TODO missing attribute validation for incomplete dish data.
     const requiredFields = ['title', 'image', 'summary', 'instructions'];
     if (!requiredFields.every(field => dishData[field])) {
       return res.status(400).json({ message: 'Validation error' });
     }
-    const existingDish = await Dish.findOne(dishData);
+
+    let user = await User.findOne({ email });
+
+    if (!user) {
+      user = new User({ email, savedDishes: [] });
+      await user.save();
+    }
+
+    const existingDish = await user.savedDishes.find(dishData);
 
     if (existingDish) {
       return res.status(400).json({ message: 'Dish already liked' });
     }
 
-    const newDish = new Dish({ ...dishData, liked: true });
-    await newDish.save();
+    const newDish: IDish = {
+      title: dishData.title,
+      image: dishData.image,
+      summary: dishData.summary,
+      instructions: dishData.instructions,
+      liked: true,
+    };
 
+    user?.savedDishes.push(newDish);
+    await user.save();
+    
     res.status(200).json({ message: 'Dish liked and saved successfully' });
 
   } catch (err) {
