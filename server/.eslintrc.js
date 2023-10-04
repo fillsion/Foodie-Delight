@@ -14,6 +14,7 @@ module.exports = {
                 "plugin:@typescript-eslint/recommended"
             ],
             "rules": {
+                '@typescript-eslint/no-var-requires': 0,
             }
         },
         {
