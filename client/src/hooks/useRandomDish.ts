@@ -6,7 +6,7 @@ import { RndDish } from "../interfaces/general";
 function useRandomDish() {
   const [randomRecipe, setRandomRecipe] = useState<RndDish[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const {showError} = useContext(ErrorContext)
+  const { showError } = useContext(ErrorContext);
 
   const generateNewKey = (): number => {
     const newKey = Math.random() * 0.001;
@@ -16,13 +16,12 @@ function useRandomDish() {
   useEffect(() => {
     async function fetchData() {
       const newKey = generateNewKey();
-      console.log(newKey);
       try {
         const data = await fetchRandomDishes();
         setRandomRecipe(data);
         setIsLoading(false);
       } catch (error) {
-        showError(error)
+        showError(error);
         setIsLoading(false);
       }
     }
@@ -30,7 +29,7 @@ function useRandomDish() {
     fetchData();
   }, []);
 
-  return {randomRecipe, isLoading}
+  return { randomRecipe, isLoading };
 }
 
 export default useRandomDish;

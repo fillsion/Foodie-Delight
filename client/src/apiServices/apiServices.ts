@@ -29,19 +29,8 @@ export function fetchRandomDishes(): Promise<RndDish[]> {
   return handleRequest(axios.get<RndDish[]>("http://localhost:4242/random-dishes"));
 }
 
-export async function handleLikeClick(
-  recipe: RndDish,
-  setLikedRecipes: React.Dispatch<React.SetStateAction<Record<string, boolean>>>
-) {
-  try {
-    await handleRequest(axios.post("http://localhost:4242/likedDishes", recipe));
-    setLikedRecipes((prevLikedRecipes) => ({
-      ...prevLikedRecipes,
-      [recipe.title]: !prevLikedRecipes[recipe.title],
-    }));
-  } catch (err) {
-    console.error("Error", err);
-  }
+export async function handleLikeClick(recipe: RndDish,) {
+  return handleRequest(axios.post("http://localhost:4242/likedDishes", recipe));
 }
 
 export function fetchRecipesByIngredient(ingredient: string): Promise<Recipe[]> {

@@ -7,15 +7,15 @@ import { ProductDetails } from "../interfaces/general";
 function useRecipeDetails() {
   const { recipeId } = useParams();
   const [recipeDetails, setRecipeDetails] = useState<ProductDetails | null>(null);
-  const {showError} = useContext(ErrorContext)
+  const { showError } = useContext(ErrorContext);
   useEffect(() => {
     async function fetchData() {
       try {
-        if (!recipeId) return
+        if (!recipeId) return;
         const data = await fetchRecipeDetails(recipeId);
         setRecipeDetails(data);
       } catch (error) {
-        showError(error)
+        showError(error);
       }
     }
     fetchData();

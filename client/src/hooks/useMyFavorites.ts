@@ -6,7 +6,7 @@ import { ErrorContext } from "../context/Error";
 
 function useMyFavorites() {
   const [likedDishes, setLikedDishes] = useState<Dishes[]>([]);
-  const {showError} = useContext(ErrorContext)
+  const { showError } = useContext(ErrorContext);
 
   useEffect(() => {
     async function fetchData() {
@@ -14,7 +14,7 @@ function useMyFavorites() {
         let data = await fetchLikedDishes();
         setLikedDishes(data);
       } catch (error) {
-        showError(error)
+        showError(error);
       }
     }
     fetchData();
