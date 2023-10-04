@@ -1,4 +1,3 @@
-import React from "react";
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { Recipe, ProductDetails, RndDish, Dishes, ErrorResponse } from "../interfaces/general";
 
@@ -41,20 +40,18 @@ export function fetchRecipesByIngredient(ingredient: string): Promise<Recipe[]> 
   );
 }
 
-export async function fetchRecipeDetails(recipeId: string): Promise<ProductDetails> {
-  try {
-    const apiUrl = `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`;
-    const response = await axios.get<ProductDetails>(apiUrl);
-    return response.data;
-  } catch (err) {
-    throw err;
-  }
+export function fetchRecipeDetails(recipeId: string): Promise<ProductDetails> {
+  return handleRequest(
+    axios.get<ProductDetails>(
+      `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${apiKey}`
+    )
+  );
 }
 
-export async function removeFromFavorites(dishId: string) {
-  try {
-    await axios.delete(`http://localhost:4242/likedDishes/${dishId}`);
-  } catch (err) {
-    throw err;
-  }
+export function removeFromFavorites(dishId: string): Promise<void> {
+  return handleRequest(axios.delete(`http://localhost:4242/likedDishes/${dishId}`));
+}
+
+export function fetchLikedDishes(): Promise<Dishes[]> {
+  return handleRequest(axios.get<Dishes[]>("http://localhost:4242/likedDishes"));
 }
