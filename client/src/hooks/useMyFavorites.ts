@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios, { AxiosError } from "axios";
 import { removeFromFavorites, fetchLikedDishes } from "../apiServices/apiServices";
 import { Dishes, ErrorResponse } from "../interfaces/general";
+import { ErrorContext } from "../context/Error";
 
 function useMyFavorites() {
   const [likedDishes, setLikedDishes] = useState<Dishes[]>([]);
+  const {showError} = useContext(ErrorContext)
 
   useEffect(() => {
     async function fetchData() {
       try {
         let data = await fetchLikedDishes();
         setLikedDishes(data);
-      } catch (err) {}
+      } catch (error) {
+        showError(error)
+      }
     }
     fetchData();
   }, []);
