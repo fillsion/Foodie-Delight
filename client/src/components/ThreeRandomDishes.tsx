@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useContext} from "react";
 import useThreeRandomDishes from "../hooks/useThreeRandomDishes";
 import { RndDish } from "../interfaces/general";
+import { UserContext } from "../context/User";
 
 interface ThreeRandomDishesProps {
   recipes: RndDish[];
@@ -10,6 +11,8 @@ const ThreeRandomDishes: React.FC<ThreeRandomDishesProps> = ({
 }: ThreeRandomDishesProps) => {
   const { selectedRecipe, likedRecipes, handleTitleClick, handleLikeClickWrapper } =
     useThreeRandomDishes();
+  
+  const { userEmail } = useContext(UserContext);
 
   return (
     <div className="recipe-list">
@@ -22,7 +25,7 @@ const ThreeRandomDishes: React.FC<ThreeRandomDishesProps> = ({
             </p>
             <button
               className={`like-button ${likedRecipes[recipe.title] ? "liked" : "not-liked"}`}
-              onClick={() => handleLikeClickWrapper(recipe)}
+              onClick={() => handleLikeClickWrapper(userEmail ,recipe)}
             >
               {likedRecipes[recipe.title] ? "Liked" : "Like"}
             </button>
