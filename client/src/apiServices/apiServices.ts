@@ -1,18 +1,19 @@
 import React from "react";
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { Recipe, ProductDetails, RndDish, Dishes } from "../interfaces/general";
+import { Recipe, ProductDetails, RndDish, Dishes, ErrorResponse } from "../interfaces/general";
 
 const apiKey = "e01d44ef8a69456a904614af30d94e79"; //337d1853f27a4c559c6e9f124a823ccb
 
 const handleErrorMessage = (error: any): string => {
-  const axiosError = error as AxiosError;
-  console.log(error)
-  if (axiosError.response) {
-    return axiosError.response.statusText;
-  }
-  console.log(error)
-  //TODO verify backend response message
-  return error.message;
+  const axiosError = error as AxiosError<ErrorResponse>;
+  // Check if the error response has backend response
+  if (axiosError.response?.data?.message) return axiosError.response.data.message;
+
+  //Default axios error
+  if (axiosError.response?.statusText) return axiosError.response.statusText;
+
+  // Fallback to a generic error message if neither is available
+  return "An unexpected error occurred";
 };
 
 async function handleRequest<T>(fetch: Promise<AxiosResponse<T>>): Promise<T> {
@@ -63,6 +64,6 @@ export function removeFromFavorites(dishId: string): Promise<void> {
   return handleRequest(axios.delete(`http://localhost:4242/likedDishes/${dishId}`));
 }
 
-export function fetchLikedDishes():Promise<Dishes[]>{
- return handleRequest(axios.get<Dishes[]>("http://localhost:4242/likedDishes"))
+export function fetchLikedDishes(): Promise<Dishes[]> {
+  return handleRequest(axios.get<Dishes[]>("http://localhost:4242/likedDishes"));
 }
