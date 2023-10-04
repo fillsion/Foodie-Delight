@@ -90,7 +90,14 @@ export const saveLikedDish = async (req: Request, res: Response) => {
 export const getLikedDishes = async (req: Request, res: Response) => {
   try {
 
-    const likedDishes = await Dish.find({ liked: true });
+    const email = req.query.email as string;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const likedDishes = user.savedDishes.filter((dish) => dish.liked);
 
     if (likedDishes.length === 0) {
       return res.status(404).json({ message: 'No liked dishes found' });
