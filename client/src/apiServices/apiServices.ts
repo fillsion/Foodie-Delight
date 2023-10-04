@@ -27,8 +27,8 @@ export function fetchRandomDishes(): Promise<RndDish[]> {
   return handleRequest(axios.get<RndDish[]>("http://localhost:4242/random-dishes"));
 }
 
-export async function handleLikeClick(recipe: RndDish,) {
-  return handleRequest(axios.post("http://localhost:4242/likedDishes", recipe));
+export async function handleLikeClick(email: string, recipe: RndDish,) {
+  return handleRequest(axios.post("http://localhost:4242/likedDishes", {email, recipe}));
 }
 
 export function fetchRecipesByIngredient(ingredient: string): Promise<Recipe[]> {
