@@ -267,8 +267,13 @@ h1 a {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 1rem;
   width: 250px;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .login-button {
   padding: 0.5rem 1rem;
@@ -284,3 +289,4 @@ h1 a {
 .login-button:hover{
   background-color: #357ab8;
 }
+
