@@ -47,8 +47,8 @@ export function fetchRecipeDetails(recipeId: string): Promise<ProductDetails> {
   );
 }
 
-export function removeFromFavorites(dishId: string): Promise<void> {
-  return handleRequest(axios.delete(`http://localhost:4242/likedDishes/${dishId}`));
+export function removeFromFavorites(email: string,dishId: string): Promise<void> {
+  return handleRequest(axios.delete(`http://localhost:4242/likedDishes/${dishId}?email=${email}`));
 }
 
 export function fetchLikedDishes(): Promise<Dishes[]> {

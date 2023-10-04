@@ -20,8 +20,8 @@ function useMyFavorites() {
     fetchData();
   }, []);
 
-  const handleRemoveFromFavorites = (dishId: string) => {
-    removeFromFavorites(dishId)
+  const handleRemoveFromFavorites = (email: string, dishId: string) => {
+    removeFromFavorites(email, dishId)
       .then(() => {
         setLikedDishes((prevDishes) => prevDishes.filter((dish) => dish._id !== dishId));
       })

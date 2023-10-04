@@ -1,8 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import useMyFavorites from "../hooks/useMyFavorites";
+import { UserContext } from "../context/User";
 
 function MyFavorites() {
- const {likedDishes, handleRemoveFromFavorites} = useMyFavorites()
+  const { likedDishes, handleRemoveFromFavorites } = useMyFavorites()
+  const { userEmail } = useContext(UserContext);
+
 
   return (
     <div className="favorite-dishes">
@@ -13,7 +16,7 @@ function MyFavorites() {
             <div className="left-fav-dish-card">
               <h2>{dish.title}</h2>
               <img src={dish.image} alt={dish.title} />
-              <button onClick={() => handleRemoveFromFavorites(dish._id)}>
+              <button onClick={() => handleRemoveFromFavorites(userEmail, dish._id)}>
                 Remove from My Favorites
               </button>
             </div>
