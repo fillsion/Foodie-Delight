@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { fetchRandomDishes } from "../apiServices/apiServices";
+import { ErrorContext } from "../context/Error";
 import { RndDish } from "../interfaces/general";
 
 function useRandomDish() {
   const [randomRecipe, setRandomRecipe] = useState<RndDish[] | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const {showError} = useContext(ErrorContext)
 
   const generateNewKey = (): number => {
     const newKey = Math.random() * 0.001;
@@ -20,6 +22,7 @@ function useRandomDish() {
         setRandomRecipe(data);
         setIsLoading(false);
       } catch (error) {
+        showError(error)
         setIsLoading(false);
       }
     }

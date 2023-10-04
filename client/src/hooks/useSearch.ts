@@ -1,14 +1,15 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import { fetchRecipesByIngredient } from '../apiServices/apiServices';
 import { useParams } from 'react-router-dom';
 import { Recipe } from '../interfaces/general';
+import { ErrorContext } from '../context/Error';
 
 
 export default function useSearch() {
 
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const { ingredient } = useParams();
-
+    const {showError} = useContext(ErrorContext)
     useEffect(() => {
       async function fetchData() {
         try {
@@ -16,8 +17,8 @@ export default function useSearch() {
           const data = await fetchRecipesByIngredient(ingredient);
           console.log("fetch recepies", data);
           setRecipes(data);
-        } catch (err) {
-          console.log(err);
+        } catch (error) {
+          showError(error)
         }
       }
 
