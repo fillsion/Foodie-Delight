@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const DB_URL = 'mongodb://127.0.0.1:27017/FoodieDelights';
+const DB_URL = 'mongodb+srv://danieldigitalartsprojects:lzYBXlmoKBiJPJ1S@cluster0.7zia4i5.mongodb.net/FoodieDelights';
 
 export const mongooseConnection = mongoose.connect(DB_URL)
   .then(() => {

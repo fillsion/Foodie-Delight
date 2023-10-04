@@ -1,0 +1,10 @@
+'use strict';
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const dishController_1 = require("./controllers/dishController");
+const router = (0, express_1.Router)();
+router.get('/random-dishes', dishController_1.getThreeRandomDishes);
+router.post('/likedDishes', dishController_1.saveLikedDish);
+router.get('/likedDishes', dishController_1.getLikedDishes);
+router.delete('/likedDishes/:dishId', dishController_1.deleteLikedDish);
+exports.default = router;
