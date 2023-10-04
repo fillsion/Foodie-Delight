@@ -3,33 +3,12 @@ import { handleLikeClick } from "../apiServices/apiServices";
 import { RndDish } from "../interfaces/general";
 import { ThreeRandomDishesProps } from "../interfaces/components";
 import { ErrorContext } from "../context/Error";
+import useThreeRandomDishes from "../hooks/useThreeRandomDishes";
 
 const ThreeRandomDishes: React.FC<ThreeRandomDishesProps> = ({
   recipes,
 }: ThreeRandomDishesProps) => {
-  const [selectedRecipe, setSelectedRecipe] = useState<RndDish | null>(null);
-  const [likedRecipes, setLikedRecipes] = useState<Record<string, boolean>>({});
-  const { showError } = useContext(ErrorContext);
-
-  const handleTitleClick = (recipe: RndDish) => {
-    if (selectedRecipe === recipe) {
-      setSelectedRecipe(null);
-    } else {
-      setSelectedRecipe(recipe);
-    }
-  };
-
-  const handleLikeClickWrapper = async (recipe: RndDish) => {
-    try {
-      await handleLikeClick(recipe);
-      setLikedRecipes((prevLikedRecipes) => ({
-        ...prevLikedRecipes,
-        [recipe.title]: !prevLikedRecipes[recipe.title],
-      }));
-    } catch (err) {
-      showError(err);
-    }
-  };
+  const {selectedRecipe, likedRecipes, handleTitleClick, handleLikeClickWrapper} = useThreeRandomDishes()
 
   return (
     <div className="recipe-list">
