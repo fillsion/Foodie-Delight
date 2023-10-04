@@ -1,8 +1,5 @@
-import React, { useContext, useState } from "react";
-import { handleLikeClick } from "../apiServices/apiServices";
-import { RndDish } from "../interfaces/general";
+import React from "react";
 import { ThreeRandomDishesProps } from "../interfaces/components";
-import { ErrorContext } from "../context/Error";
 import useThreeRandomDishes from "../hooks/useThreeRandomDishes";
 
 const ThreeRandomDishes: React.FC<ThreeRandomDishesProps> = ({

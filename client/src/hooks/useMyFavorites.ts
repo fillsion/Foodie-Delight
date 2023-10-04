@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios, { AxiosError } from "axios";
+import { useState, useEffect, useContext } from "react";
+import { AxiosError } from "axios";
 import { removeFromFavorites, fetchLikedDishes } from "../apiServices/apiServices";
 import { Dishes, ErrorResponse } from "../interfaces/general";
 import { ErrorContext } from "../context/Error";
@@ -11,7 +11,7 @@ function useMyFavorites() {
   useEffect(() => {
     async function fetchData() {
       try {
-        let data = await fetchLikedDishes();
+        const data = await fetchLikedDishes();
         setLikedDishes(data);
       } catch (error) {
         showError(error);

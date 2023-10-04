@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { handleLikeClick } from "../apiServices/apiServices";
 import { RndDish } from "../interfaces/general";
 import { ErrorContext } from "../context/Error";

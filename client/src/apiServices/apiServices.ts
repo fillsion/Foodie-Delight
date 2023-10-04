@@ -3,13 +3,12 @@ import { Recipe, ProductDetails, RndDish, Dishes, ErrorResponse } from "../inter
 
 const apiKey = "e01d44ef8a69456a904614af30d94e79"; //337d1853f27a4c559c6e9f124a823ccb
 
-const handleErrorMessage = (error: any): string => {
-  const axiosError = error as AxiosError<ErrorResponse>;
+const handleErrorMessage = (error: AxiosError<ErrorResponse>): string => {
   // Check if the error response has backend response
-  if (axiosError.response?.data?.message) return axiosError.response.data.message;
+  if (error.response?.data?.message) return error.response.data.message;
 
   //Default axios error
-  if (axiosError.response?.statusText) return axiosError.response.statusText;
+  if (error.response?.statusText) return error.response.statusText;
 
   // Fallback to a generic error message if neither is available
   return "An unexpected error occurred";
@@ -19,7 +18,7 @@ async function handleRequest<T>(fetch: Promise<AxiosResponse<T>>): Promise<T> {
   try {
     const response = await fetch;
     return response.data;
-  } catch (err: any) {
+  } catch (err) {
     return Promise.reject(handleErrorMessage(err));
   }
 }
