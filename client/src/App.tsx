@@ -43,27 +43,10 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={
-              isLoading ? (
-                <p>Loading...</p>
-              ) : (
-                <ThreeRandomDishes
-                  recipes={recipes}
-                  // favorites={favorites}
-                  // recipesThatAreLiked={recipesThatAreLiked}
-                />
-              )
-            }
+            element={isLoading ? <p>Loading...</p> : <ThreeRandomDishes recipes={recipes} />}
           />
           <Route path="/random-dish" element={<RandomDish />} />
-          <Route
-            path="/my-favorites"
-            element={
-              <MyFavorites
-              // recipesThatAreLiked={recipesThatAreLiked}
-              />
-            }
-          />
+          <Route path="/my-favorites" element={<MyFavorites />} />
           <Route
             path="/ingredient/:ingredient/*"
             element={<IngredientSearchResults isLoading={false} />}
