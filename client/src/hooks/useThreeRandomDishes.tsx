@@ -1,5 +1,5 @@
-import { useContext, useState } from "react";
-import { handleLikeClick } from "../apiServices/apiServices";
+import { useContext, useState, useEffect } from "react";
+import { fetchRandomDishes, handleLikeClick } from "../apiServices/apiServices";
 import { RndDish } from "../interfaces/general";
 import { ErrorContext } from "../context/Error";
 
@@ -7,6 +7,24 @@ const useThreeRandomDishes = () => {
   const [selectedRecipe, setSelectedRecipe] = useState<RndDish | null>(null);
   const [likedRecipes, setLikedRecipes] = useState<Record<string, boolean>>({});
   const { showError } = useContext(ErrorContext);
+  const [recipes, setRecipes] = useState<RndDish[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await fetchRandomDishes();
+        setRecipes(data);
+        setIsLoading(false);
+      } catch (err) {
+        showError(err);
+        setIsLoading(false);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   const handleTitleClick = (recipe: RndDish) => {
     if (selectedRecipe === recipe) {
@@ -28,7 +46,7 @@ const useThreeRandomDishes = () => {
     }
   };
 
-  return {selectedRecipe, likedRecipes, handleTitleClick, handleLikeClickWrapper}
+  return {selectedRecipe, likedRecipes, handleTitleClick, handleLikeClickWrapper ,recipes, isLoading}
 };
 
 export default useThreeRandomDishes;

@@ -5,7 +5,7 @@ import { UserContext } from '../context/User';
 const clientId = "448540240533-9eq2nc4un10n8dn1ru2ifeu6mohp7p30.apps.googleusercontent.com";
 
 function Login() {
-    const { setIsLogged, setUserEmail } = useContext(UserContext); 
+    const {setIsLogged, setUserEmail } = useContext(UserContext);
 
     const onSuccess = (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
         if ('profileObj' in res) {
@@ -13,7 +13,7 @@ function Login() {
             setIsLogged(true);
             setUserEmail(res.profileObj.email)
         } else {
-            console.log("Success", res);
+            console.log("Error", res);
         }
     }
 

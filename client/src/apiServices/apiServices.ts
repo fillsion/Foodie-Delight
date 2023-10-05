@@ -1,7 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
 import { Recipe, ProductDetails, RndDish, Dishes, ErrorResponse } from "../interfaces/general";
 
-const apiKey = "e01d44ef8a69456a904614af30d94e79"; //337d1853f27a4c559c6e9f124a823ccb
+const apiKey = "337d1853f27a4c559c6e9f124a823ccb"; //337d1853f27a4c559c6e9f124a823ccb
 
 const handleErrorMessage = (error: AxiosError<ErrorResponse>): string => {
   // Check if the error response has backend response
