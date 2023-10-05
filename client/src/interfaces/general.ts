@@ -155,3 +155,4 @@ export interface RndDish{
   summary:string;
   instructions:string
 }
+
