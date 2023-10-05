@@ -2,10 +2,11 @@ import mongoose, { Model } from 'mongoose';
 
 export interface IUser {
   email: string;
-  savedDishes: IDish[];
+  savedDishes: SavedDish[];
 }
 
-export interface IDish {
+export interface SavedDish {
+  _id:string,
   title: string;
   image: string;
   summary: string;
@@ -13,7 +14,7 @@ export interface IDish {
   liked: boolean;
 }
 
-const dishSchema = new mongoose.Schema<IDish>({
+const dishSchema = new mongoose.Schema<SavedDish>({
   title: String,
   image: String,
   summary: String,
@@ -30,7 +31,7 @@ const userSchema = new mongoose.Schema<IUser>({
     unique: true,
     required: true,
   },
-  savedDishes: [dishSchema], 
+  savedDishes: [dishSchema],
 });
 
 const User: Model<IUser> = mongoose.model<IUser>('User', userSchema);

@@ -2,9 +2,10 @@
 
 import axios, { AxiosResponse } from 'axios';
 import * as cheerio from 'cheerio';
-import Dish, { IDish } from '../models/User';
+import { IDish } from '../models/Dish';
 import User, {IUser} from '../models/User';
 import { Request, Response } from 'express';
+import { SavedDish } from '../models/User';
 
 const apiKey = 'e01d44ef8a69456a904614af30d94e79';
 
@@ -68,7 +69,8 @@ export const saveLikedDish = async (req: Request, res: Response) => {
       return res.status(400).json({ message: 'Dish already liked' });
     }
 
-    const newDish: IDish = {
+    const newDish: SavedDish = {
+      _id: dishData._id,
       title: dishData.title,
       image: dishData.image,
       summary: dishData.summary,
@@ -78,7 +80,7 @@ export const saveLikedDish = async (req: Request, res: Response) => {
 
     user?.savedDishes.push(newDish);
     await user.save();
-    
+
     res.status(200).json({ message: 'Dish liked and saved successfully' });
 
   } catch (err) {
@@ -120,7 +122,7 @@ export const deleteLikedDish = async (req: Request, res: Response) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    const dishIndex = user.savedDishes.findIndex((dish) => dish._id.toString() === dishId);
+    const dishIndex = user.savedDishes.findIndex((dish:SavedDish) => dish._id.toString() === dishId);
 
     if (dishIndex === -1) {
       return res.status(404).json({ message: 'Dish not found' });

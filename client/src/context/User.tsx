@@ -3,7 +3,7 @@ import React, { createContext, useState, Dispatch, SetStateAction } from "react"
 interface UserContextProps {
   isLogged: boolean;
   setIsLogged: Dispatch<SetStateAction<boolean>>;
-  userEmail: string; 
+  userEmail: string;
   setUserEmail: Dispatch<SetStateAction<string>>;
 }
 
@@ -11,7 +11,7 @@ export const UserContext = createContext<UserContextProps>({
   isLogged: false,
   setIsLogged: () => { },
   userEmail: '',
-  setUserEmail: (value: string) => { },
+  setUserEmail: () => { },
 });
 
 interface UserProviderProps {
@@ -20,7 +20,7 @@ interface UserProviderProps {
 
 export const UserProvider: React.FC<UserProviderProps> = ({ children }: UserProviderProps) => {
   const [isLogged, setIsLogged] = useState<boolean>(false);
-  const [userEmail, setUserEmail] = useState<string>(''); 
+  const [userEmail, setUserEmail] = useState<string>('');
 
   return (
     <UserContext.Provider value={{ isLogged, setIsLogged, userEmail, setUserEmail }}>
