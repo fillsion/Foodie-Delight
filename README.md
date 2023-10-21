@@ -21,7 +21,7 @@ To set up and run the backend:
 The frontend is crafted with React, offering a responsive and user-friendly interface.
 
 To set up and run the frontend:
-    ```
+    ```bash
     npm i
     npm start
 
