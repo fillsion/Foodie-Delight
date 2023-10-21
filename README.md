@@ -24,7 +24,7 @@ To set up and run the frontend:
     ```bash
     npm i
     npm start
-
+    ```
 ### API Key
 
 This application uses the Spoonacular API.
