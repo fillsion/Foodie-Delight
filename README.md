@@ -14,6 +14,7 @@ To set up and run the backend:
     ```bash
     npm i
     API_KEY=abc123 nodemon index.js
+    ```
 
 ### Frontend
 
