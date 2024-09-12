@@ -1,3 +1,4 @@
+import React from "react";
 import useMyFavorites from "../hooks/useMyFavorites";
 
 function MyFavorites() {

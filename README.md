@@ -1,23 +1,33 @@
-# Foodie Delight 
+# Foodie Delight 🍽️
 
 ## Introduction
 
-Hi I'm Rosie
-This gonna be where I will start my solo project
-
-## Usage
-
-### apiKey
-
-This program is using apiKey in both Front End and Back End
-
-- Front End: I hard coded the apiKey but for now it's a fake one. I'm aware of the cybersecurity issues so I will give you the real one if you wanna run the program just contact me.
-
-- Back End: I solved this problem with enviroment variable `API_KEY`. You need to provide it when running the backend. E.g.
-
-```bash
-API_KEY=abc123 nodemon index.js
-```
+Foodie Delight is a project that seamlessly blends the dynamic capabilities of Node.js in the backend with the powerful and intuitive React framework in the frontend. This application leverages the Spoonacular API to bring culinary exploration to the next level.
 
 
+## Technical Details
 
+### Backend
+Developed using Node.js, the backend ensures efficient data processing and serves the frontend with necessary information.
+
+To set up and run the backend:
+    ```bash
+    npm i
+    API_KEY=abc123 nodemon index.js
+    ```
+
+### Frontend
+
+The frontend is crafted with React, offering a responsive and user-friendly interface.
+
+To set up and run the frontend:
+    ```bash
+    npm i
+    npm start
+    ```
+### API Key
+
+This application uses the Spoonacular API.
+
+
+Dive in and enjoy Foodie Delight!

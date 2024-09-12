@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { fetchRandomDishes } from "../apiServices/apiServices";
-import { RndDish } from "../interfaces/general";
+import React from 'react'
 import useRandomDish from '../hooks/useRandomDish';
 
 function RandomDish() {

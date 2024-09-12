@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Recipe, ProductDetails, RndDish } from "../interfaces/general";
-const apiKey = "e01d44ef8a69456a904614af30d94e79";
+const apiKey = "Your api key";
 
 export async function fetchRandomDishes(): Promise<RndDish[]> {
   try {
@@ -36,7 +36,7 @@ export async function fetchRecipesByIngredient(ingredient: string): Promise<Reci
 
     return response.data;
   } catch (err) {
-    throw err;
+    console.log(err)
   }
 }
 
@@ -46,7 +46,7 @@ export async function fetchRecipeDetails(recipeId: string): Promise<ProductDetai
     const response = await axios.get<ProductDetails>(apiUrl);
     return response.data;
   } catch (err) {
-    throw err;
+    console.log(err)
   }
 }
 
@@ -54,6 +54,6 @@ export async function removeFromFavorites(dishId: string) {
   try {
     await axios.delete(`http://localhost:4242/likedDishes/${dishId}`);
   } catch (err) {
-    throw err;
+    console.log(err)
   }
 }

@@ -15,8 +15,6 @@ import { RndDish } from './interfaces/general';
 function App() {
   const [recipes, setRecipes] = useState<RndDish[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [favorites, setFavorites] = useState<RndDish[]>([]);
-  const [recipesThatAreLiked] = useState<RndDish[]>([]);
 
   useEffect(() => {
     async function fetchData() {
@@ -33,10 +31,6 @@ function App() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const savedFavorites = JSON.parse(localStorage.getItem("favorites")) || [];
-    setFavorites(savedFavorites);
-  }, []);
 
   return (
     <Router>
