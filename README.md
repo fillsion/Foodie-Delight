@@ -18,6 +18,23 @@ This program is using apiKey in both Front End and Back End
 ```bash
 API_KEY=abc123 nodemon index.js
 ```
+## Built With
 
+MongoDB<br>
+Express<br>
+React<br>
+Node<br>
 
+## Features List
 
+- Random recipe Recommendations
+- Favorite Recipes
+- Unfavorite Recipes
+- search recipes by ingredients categories
+- Individual pages for each recipe
+- track ingredients by id
+
+## Coming Soon
+
+- Full documentation
+  - Setup tutorial
